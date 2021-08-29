@@ -92,14 +92,7 @@ background-color: LightPink;
 		display: block;
 	
 
-    canvas.myCanvas{
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 800px;
-}
+    
 
 
 
@@ -134,6 +127,8 @@ background-color: LightPink;
 </br>
 To download the image, right click on it and click "Open Image" or "Save Image As"  	 (´｡• ω •｡`)
 </br>
+<button type="submit" id="btndownload" onclick="download(myCanvas, 'myimage.png')" style="border: 4px solid deeppink; background-color: lightpink; color: white; font-family: Comic Sans MS, Comic Sans, cursive;" >Download!!!</button></br>
+</br>
 <canvas id="myCanvas" width="100%" height="100%" style="border: 1px solid black;">>Your browser does not support the HTML canvas tag.</canvas>
 	</div>
 
@@ -141,9 +136,12 @@ To download the image, right click on it and click "Open Image" or "Save Image A
 
 </div>
 	<script>
+
+
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
+
 
 	function previewFile() {
   var preview = document.getElementById('preview')
@@ -211,6 +209,41 @@ frame.src = frames[Math.floor(Math.random() * frames.length)].toString();
 
 }
 
+window.onload = function(){
+  var dwn = document.getElementById('btndownload');
+      canvas = document.getElementById('myCanvas');
+   
+  dwn.onclick = function(){
+    download(canvas, 'myimage.png');
+  }
+
+}
+
+/* Canvas Donwload */
+function download(canvas, filename) {
+  /// create an "off-screen" anchor tag
+  var lnk = document.createElement('a'), e;
+
+  /// the key here is to set the download attribute of the a tag
+  lnk.download = filename;
+
+  /// convert canvas content to data-uri for link. When download
+  /// attribute is set the content pointed to by link will be
+  /// pushed as "download" in HTML5 capable browsers
+  lnk.href = canvas.toDataURL("image/png;base64");
+
+  /// create a "fake" click-event to trigger the download
+  if (document.createEvent) {
+    e = document.createEvent("MouseEvents");
+    e.initMouseEvent("click", true, true, window,
+                     0, 0, 0, 0, 0, false, false, false,
+                     false, 0, null);
+
+    lnk.dispatchEvent(e);
+  } else if (lnk.fireEvent) {
+    lnk.fireEvent("onclick");
+  }
+}
 	</script>
 </body>
 
