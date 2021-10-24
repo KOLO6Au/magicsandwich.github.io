@@ -2,21 +2,27 @@
 <head>
 	<title>Hohol clicker</title>
 	<link rel="shortcut icon" href="images/favicon.png" type="image/png">
-	<meta charset="utf-8">
+	<meta charset="utf-8" name="viewport" content= "width=device-width, user-scalable=no">
 	<style>
-	body{background: #ffffff url("images/america.png") no-repeat right top;
-	background-size: 101%;
+	body{background: #ffffff url("images/america.png")  no-repeat right top;
+	 /* Full height */
+  height: 110%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
 }
 	*{
-		margin:0px;
-		padding: 0px;
+		margin:0%;
+		padding: 0%;
 		font-family: "tahoma";
 	}
 	@keyframes jump {
-	0% {top:0px;}
-    50%  {top:-190px;}
-    100% {top:0px;}
+	0% {top:50%;}
+    50%  {top:30%;}
+    100% {top:50%;}
 }
 
 
@@ -25,9 +31,15 @@ animation: jump 0.5s 1;
 position: relative;
     }
 	#hohol{
-		margin: 0 auto;
+		
 		width: 400px;
 		height: 400px;
+		margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
         
 		
 	}
@@ -44,27 +56,37 @@ position: relative;
 	}
 	#jumpregion{
 		margin: 0 auto;
+		position: absolute;
 		width: 600px;
-		height: 200px;
+		height: 100%;
 
 	}
 	#count{
-		width: 700px;
-		margin: 0 auto;
+		
+		margin: 0;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 		text-align: center;
 		color: white;
 		-webkit-text-stroke: 1px black;
 		font-size: 30px;
-		padding-top:10px;
+		
 	}
 	#count1{
-		width: 750px;
-		margin: 0 auto;
+		
+		margin: 0;
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 		text-align: center;
 		color: white;
 		-webkit-text-stroke: 1px black;
 		font-size: 30px;
-		padding-top:10px;
 	}
 	#video{
 		transition:2.1s;
@@ -91,10 +113,9 @@ position: relative;
 
 	</style>
 	</head>
-<body>
+<body onclick="ClickHohol()">
 	<div id="the-game"></div>
-	<div id="jumpregion"></div>
-	<div id="hohol" class="run-anim" onclick="ClickHohol()" >
+	<div id="hohol" class="run-anim"  onkeypress="ClickHohol()">
     <div id="hohol2"></div>
 	<div id="hohol1"></div>
 	</div>
@@ -113,6 +134,9 @@ position: relative;
 	<script>
 	var hohol = document.getElementById("hohol");
 	var jumps = 0;
+	window.onload = function() {
+    hohol.onkeypress = ClickHohol;
+}
 		function ClickHohol(){
 			jumps++;
 			document.getElementById("count").innerHTML = "Прыжков проскачено - "+ jumps +" ";
